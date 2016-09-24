@@ -16,6 +16,8 @@ buildscript {
         support_lib_version = '24.2.1'
         junit_version = '4.12'
         espresso_version = '2.2.2'
+        mockito_version = "1.10.19"
+        hamcrest_version = "1.3"
     }
 }
 
