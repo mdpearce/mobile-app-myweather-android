@@ -38,30 +38,30 @@ public class OpenWeatherMapProviderTest {
         MockitoAnnotations.initMocks(this);
         openWeatherMapProvider = new OpenWeatherMapProvider(openWeatherMapService);
 
-        when(openWeatherMapService.searchForCurrentWeatherByCity(anyString())).thenReturn(call);
-        when(openWeatherMapService.searchForCurrentWeatherByZip(anyString())).thenReturn(call);
-        when(openWeatherMapService.searchForCurrentWeatherByLatLon(anyString(), anyString())).thenReturn(call);
+        when(openWeatherMapService.searchForCurrentWeatherByCity(anyString(), anyString())).thenReturn(call);
+        when(openWeatherMapService.searchForCurrentWeatherByZip(anyString(), anyString())).thenReturn(call);
+        when(openWeatherMapService.searchForCurrentWeatherByLatLon(anyString(), anyString(), anyString())).thenReturn(call);
 
     }
 
     @Test
     public void OpenWeatherMapProvider_HitsServiceForCity() {
         openWeatherMapProvider.searchForCurrentWeather("Sydney", currentWeatherCallback);
-        verify(openWeatherMapService).searchForCurrentWeatherByCity("Sydney");
+        verify(openWeatherMapService).searchForCurrentWeatherByCity("Sydney", null);
         verify(call).enqueue(ArgumentCaptor.forClass(Callback.class).capture());
     }
 
     @Test
     public void OpenWeatherMapProvider_HitsServiceForLatLon() {
         openWeatherMapProvider.searchForCurrentWeather(0d, 0d, currentWeatherCallback);
-        verify(openWeatherMapService).searchForCurrentWeatherByLatLon("0.0", "0.0");
+        verify(openWeatherMapService).searchForCurrentWeatherByLatLon("0.0", "0.0", null);
         verify(call).enqueue(ArgumentCaptor.forClass(Callback.class).capture());
     }
 
     @Test
     public void OpenWeatherMapProvider_HitsServiceForZip() {
         openWeatherMapProvider.searchForCurrentWeather("90210", currentWeatherCallback);
-        verify(openWeatherMapService).searchForCurrentWeatherByZip("90210");
+        verify(openWeatherMapService).searchForCurrentWeatherByZip("90210", null);
         verify(call).enqueue(ArgumentCaptor.forClass(Callback.class).capture());
     }
 

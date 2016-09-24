@@ -12,11 +12,11 @@ import retrofit2.http.Query;
 
 public interface OpenWeatherMapService {
     @GET("weather")
-    Call<CurrentWeather> searchForCurrentWeatherByCity(@Query("q") String cityString);
+    Call<CurrentWeather> searchForCurrentWeatherByCity(@Query("q") String cityString, @Query("appid") String apiKey);
 
     @GET("weather")
-    Call<CurrentWeather> searchForCurrentWeatherByZip(@Query("zip") String zipString);
+    Call<CurrentWeather> searchForCurrentWeatherByZip(@Query("zip") String zipString, @Query("appid") String apiKey);
 
     @GET("weather")
-    Call<CurrentWeather> searchForCurrentWeatherByLatLon(@Query("lat") String lat, @Query("lon") String lon);
+    Call<CurrentWeather> searchForCurrentWeatherByLatLon(@Query("lat") String lat, @Query("lon") String lon, @Query("appid") String apiKey);
 }

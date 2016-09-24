@@ -19,7 +19,7 @@ public class CurrentWeather {
     CoOrd LocationCoOrds;
 
     @SerializedName("weather")
-    WeatherConditions weatherConditions;
+    WeatherConditions[] weatherConditions;
 
     @SerializedName("main")
     MainValues mainValues;

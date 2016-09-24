@@ -10,7 +10,7 @@ public class Wind {
     Double speed;
 
     @SerializedName("deg")
-    Integer directionDegrees;
+    Double directionDegrees;
 
     @SerializedName("gust")
     Double gustSpeed;

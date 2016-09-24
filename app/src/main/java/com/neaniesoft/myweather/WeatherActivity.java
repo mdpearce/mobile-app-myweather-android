@@ -1,13 +1,20 @@
 package com.neaniesoft.myweather;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
+import com.neaniesoft.myweather.data.model.CurrentWeather;
+import com.neaniesoft.myweather.data.repository.WeatherProvider;
+import com.neaniesoft.myweather.data.repository.WeatherRepository;
 
 public class WeatherActivity extends AppCompatActivity {
 
@@ -24,6 +31,18 @@ public class WeatherActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+            }
+        });
+        WeatherProvider repo = WeatherRepository.getInstance();
+        repo.searchForCurrentWeather("sydney", new WeatherProvider.CurrentWeatherCallback() {
+            @Override
+            public void onCurrentWeatherReceived(@NonNull CurrentWeather currentWeather) {
+                Log.d("act", "done");
+            }
+
+            @Override
+            public void onNoCurrentWeatherAvailable(@Nullable String error) {
+                Log.d("act", error);
             }
         });
     }

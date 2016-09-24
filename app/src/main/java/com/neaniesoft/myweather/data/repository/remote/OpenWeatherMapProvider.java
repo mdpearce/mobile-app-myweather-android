@@ -2,6 +2,7 @@ package com.neaniesoft.myweather.data.repository.remote;
 
 import android.support.annotation.NonNull;
 
+import com.neaniesoft.myweather.BuildConfig;
 import com.neaniesoft.myweather.data.model.CurrentWeather;
 import com.neaniesoft.myweather.data.repository.WeatherProvider;
 
@@ -37,7 +38,7 @@ public class OpenWeatherMapProvider implements WeatherProvider {
     }
 
     private void enqueCitySearch(@NonNull final CurrentWeatherCallback callback, String searchRequest) {
-        Call<CurrentWeather> call = openWeatherMapService.searchForCurrentWeatherByCity(searchRequest);
+        Call<CurrentWeather> call = openWeatherMapService.searchForCurrentWeatherByCity(searchRequest, BuildConfig.OPENWEATHERMAP_API_KEY);
         call.enqueue(new Callback<CurrentWeather>() {
             @Override
             public void onResponse(Call<CurrentWeather> call, Response<CurrentWeather> response) {
@@ -53,14 +54,14 @@ public class OpenWeatherMapProvider implements WeatherProvider {
             @Override
             public void onFailure(Call<CurrentWeather> call, Throwable t) {
                 if (callback != null) {
-                    callback.onNoCurrentWeatherAvailable("Failure getting response from server");
+                    callback.onNoCurrentWeatherAvailable(t.getMessage());
                 }
             }
         });
     }
 
     private void enqueZipSearch(@NonNull final CurrentWeatherCallback callback, String searchRequest) {
-        Call<CurrentWeather> call = openWeatherMapService.searchForCurrentWeatherByZip(searchRequest);
+        Call<CurrentWeather> call = openWeatherMapService.searchForCurrentWeatherByZip(searchRequest, BuildConfig.OPENWEATHERMAP_API_KEY);
         call.enqueue(new Callback<CurrentWeather>() {
             @Override
             public void onResponse(Call<CurrentWeather> call, Response<CurrentWeather> response) {
@@ -76,7 +77,7 @@ public class OpenWeatherMapProvider implements WeatherProvider {
             @Override
             public void onFailure(Call<CurrentWeather> call, Throwable t) {
                 if (callback != null) {
-                    callback.onNoCurrentWeatherAvailable("Failure getting response from server");
+                    callback.onNoCurrentWeatherAvailable(t.getMessage());
                 }
             }
         });
@@ -84,7 +85,7 @@ public class OpenWeatherMapProvider implements WeatherProvider {
 
     @Override
     public void searchForCurrentWeather(double lat, double lon, @NonNull final CurrentWeatherCallback callback) {
-        Call<CurrentWeather> call = openWeatherMapService.searchForCurrentWeatherByLatLon(String.valueOf(lat), String.valueOf(lon));
+        Call<CurrentWeather> call = openWeatherMapService.searchForCurrentWeatherByLatLon(String.valueOf(lat), String.valueOf(lon), BuildConfig.OPENWEATHERMAP_API_KEY);
         call.enqueue(new Callback<CurrentWeather>() {
             @Override
             public void onResponse(Call<CurrentWeather> call, Response<CurrentWeather> response) {
@@ -100,7 +101,7 @@ public class OpenWeatherMapProvider implements WeatherProvider {
             @Override
             public void onFailure(Call<CurrentWeather> call, Throwable t) {
                 if (callback != null) {
-                    callback.onNoCurrentWeatherAvailable("Failure getting response from server");
+                    callback.onNoCurrentWeatherAvailable(t.getMessage());
                 }
             }
         });

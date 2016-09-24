@@ -14,7 +14,7 @@ public class WeatherRepository implements WeatherProvider {
 
     private static WeatherRepository sInstance;
 
-    public WeatherRepository getInstance() {
+    public static WeatherRepository getInstance() {
         if (sInstance == null) {
             sInstance = new WeatherRepository(Injection.provideOpenWeatherMapProvider());
         }
