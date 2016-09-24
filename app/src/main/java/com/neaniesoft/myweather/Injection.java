@@ -3,6 +3,8 @@ package com.neaniesoft.myweather;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.neaniesoft.myweather.data.repository.remote.OpenWeatherMapProvider;
+import com.neaniesoft.myweather.data.repository.remote.OpenWeatherMapService;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -26,5 +28,13 @@ public class Injection {
                 .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
                 .create();
         return gson;
+    }
+
+    public static OpenWeatherMapService provideOpenWeatherMapService() {
+        return provideRetrofit().create(OpenWeatherMapService.class);
+    }
+
+    public static OpenWeatherMapProvider provideOpenWeatherMapProvider() {
+        return new OpenWeatherMapProvider(provideOpenWeatherMapService());
     }
 }
