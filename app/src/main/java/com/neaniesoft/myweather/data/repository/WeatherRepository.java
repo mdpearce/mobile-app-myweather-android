@@ -2,8 +2,6 @@ package com.neaniesoft.myweather.data.repository;
 
 import android.support.annotation.NonNull;
 
-import com.neaniesoft.myweather.Injection;
-
 /**
  * Created by mdpearce on 24/09/2016.
  */
@@ -14,9 +12,9 @@ public class WeatherRepository implements WeatherProvider {
 
     private static WeatherRepository sInstance;
 
-    public static WeatherRepository getInstance() {
+    public static WeatherRepository getInstance(@NonNull WeatherProvider service) {
         if (sInstance == null) {
-            sInstance = new WeatherRepository(Injection.provideOpenWeatherMapProvider());
+            sInstance = new WeatherRepository(service);
         }
         return sInstance;
     }

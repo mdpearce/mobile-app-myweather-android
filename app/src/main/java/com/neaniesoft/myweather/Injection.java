@@ -3,6 +3,7 @@ package com.neaniesoft.myweather;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.neaniesoft.myweather.data.repository.WeatherRepository;
 import com.neaniesoft.myweather.data.repository.remote.OpenWeatherMapProvider;
 import com.neaniesoft.myweather.data.repository.remote.OpenWeatherMapService;
 
@@ -36,5 +37,9 @@ public class Injection {
 
     public static OpenWeatherMapProvider provideOpenWeatherMapProvider() {
         return new OpenWeatherMapProvider(provideOpenWeatherMapService());
+    }
+
+    public static WeatherRepository provideWeatherRepository() {
+        return WeatherRepository.getInstance(Injection.provideOpenWeatherMapProvider());
     }
 }

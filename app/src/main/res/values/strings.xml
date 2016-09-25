@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">My Weather</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_search">Search</string>
+    <string name="use_my_current_location">Use my current location</string>
+    <string name="or">OR</string>
+    <string name="error_invalid_search">Please enter a valid search query</string>
+    <string name="error_no_weather_data">No weather data available</string>
 </resources>
