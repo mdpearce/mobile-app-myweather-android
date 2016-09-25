@@ -9,4 +9,12 @@ import com.google.gson.annotations.SerializedName;
 public class Rain {
     @SerializedName("3h")
     Double last3Hours;
+
+    public Double getLast3Hours() {
+        return last3Hours;
+    }
+
+    public void setLast3Hours(Double last3Hours) {
+        this.last3Hours = last3Hours;
+    }
 }

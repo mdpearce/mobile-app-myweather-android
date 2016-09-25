@@ -9,4 +9,12 @@ import com.google.gson.annotations.SerializedName;
 public class Clouds {
     @SerializedName("all")
     Integer cloudiness;
+
+    public Integer getCloudiness() {
+        return cloudiness;
+    }
+
+    public void setCloudiness(Integer cloudiness) {
+        this.cloudiness = cloudiness;
+    }
 }

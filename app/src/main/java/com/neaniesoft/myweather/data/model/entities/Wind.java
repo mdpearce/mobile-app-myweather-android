@@ -9,6 +9,30 @@ import com.google.gson.annotations.SerializedName;
 public class Wind {
     Double speed;
 
+    public Double getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(Double speed) {
+        this.speed = speed;
+    }
+
+    public Double getDirectionDegrees() {
+        return directionDegrees;
+    }
+
+    public void setDirectionDegrees(Double directionDegrees) {
+        this.directionDegrees = directionDegrees;
+    }
+
+    public Double getGustSpeed() {
+        return gustSpeed;
+    }
+
+    public void setGustSpeed(Double gustSpeed) {
+        this.gustSpeed = gustSpeed;
+    }
+
     @SerializedName("deg")
     Double directionDegrees;
 

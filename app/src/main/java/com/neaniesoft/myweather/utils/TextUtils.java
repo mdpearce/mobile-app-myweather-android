@@ -1,11 +1,16 @@
 package com.neaniesoft.myweather.utils;
 
+import android.support.annotation.Nullable;
+
+import java.util.Locale;
+
 /**
  * Created by mdpearce on 24/09/2016.
  */
 
 public class TextUtils {
     /**
+     * Taken from Apache TextUtils
      * Returns whether the given CharSequence contains only digits.
      */
     public static boolean isDigitsOnly(CharSequence str) {
@@ -18,4 +23,40 @@ public class TextUtils {
         }
         return true;
     }
+
+    public static @Nullable String formatDoubleValue(Double value) {
+        if (value != null) {
+            return String.format(Locale.getDefault(), "%.2f", value);
+        }
+        return null;
+    }
+
+    public static @Nullable String formatIntValue(Integer value) {
+        if (value != null) {
+            return value.toString();
+        }
+        return null;
+    }
+
+    // Basic direction -> cardinal conversion from http://stackoverflow.com/a/25349774/765286
+    public static String formatDirection(Double directionDegrees) {
+        if (directionDegrees == null) {
+            return null;
+        }
+        double bearing = directionDegrees;
+        if (bearing < 0 && bearing > -180) {
+            bearing = 360.0 + bearing;
+        }
+        if (bearing > 360 || bearing < -180) {
+            return "Unknown";
+        }
+        return sDirections[(int) Math.floor(((bearing + 11.25) % 360) / 22.5)];
+    }
+
+    private static String sDirections[] = {
+            "N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE",
+            "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW",
+            "N"};
+
+
 }

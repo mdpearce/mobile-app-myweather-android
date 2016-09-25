@@ -14,6 +14,8 @@ import com.neaniesoft.myweather.R;
 import com.neaniesoft.myweather.search.SearchActivity;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -49,6 +51,8 @@ public class WeatherFragment extends Fragment implements WeatherView {
     @BindView(R.id.text_temp_and_conditions)
     TextView textTempAndConditions;
 
+    private Unbinder mUnbinder;
+
     public WeatherFragment() {
     }
 
@@ -59,7 +63,21 @@ public class WeatherFragment extends Fragment implements WeatherView {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_weather, container, false);
+        View v = inflater.inflate(R.layout.fragment_weather, container, false);
+        mUnbinder = ButterKnife.bind(this, v);
+        return v;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mUnbinder.unbind();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mPresenter.start();
     }
 
     @Override
