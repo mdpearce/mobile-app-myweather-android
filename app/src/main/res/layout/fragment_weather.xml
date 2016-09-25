@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
+    android:orientation="vertical"
     android:id="@+id/content_weather"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -12,4 +13,115 @@
     tools:context="com.neaniesoft.myweather.weather.WeatherFragment"
     tools:showIn="@layout/activity_weather">
 
-</RelativeLayout>
+    <TextView
+        android:text="@string/weather"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_label_location"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:columnCount="2">
+
+        <TextView
+            android:id="@+id/text_label_wind"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_wind"
+            style="@style/LabelStyle"/>
+
+        <TextView
+            android:id="@+id/text_wind"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/blank"
+            style="@style/DataStyle"/>
+
+        <TextView
+            android:id="@+id/text_label_cloudiness"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_cloudiness"
+            style="@style/LabelStyle"/>
+
+        <TextView
+            android:id="@+id/text_cloudiness"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/blank"
+            style="@style/DataStyle"/>
+
+        <TextView
+            android:id="@+id/text_label_pressure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_pressure"
+            style="@style/LabelStyle"/>
+
+        <TextView
+            android:id="@+id/text_pressure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/blank"
+            style="@style/DataStyle"/>
+
+        <TextView
+            android:id="@+id/text_label_humidity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_humidity"
+            style="@style/LabelStyle"/>
+
+        <TextView
+            android:id="@+id/text_humidity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/blank"
+            style="@style/DataStyle"/>
+
+        <TextView
+            android:id="@+id/text_label_rain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_rain"
+            style="@style/LabelStyle"/>
+
+        <TextView
+            android:id="@+id/text_rain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/blank"
+            style="@style/DataStyle"/>
+
+        <TextView
+            android:id="@+id/text_label_sunrise"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_sunrise"
+            style="@style/LabelStyle"/>
+
+        <TextView
+            android:id="@+id/text_sunrise"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/blank"
+            style="@style/DataStyle"/>
+
+        <TextView
+            android:id="@+id/text_label_sunset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_sunset"
+            style="@style/LabelStyle"/>
+
+        <TextView
+            android:id="@+id/text_sunset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/blank"
+            style="@style/DataStyle"/>
+    </GridLayout>
+
+</LinearLayout>

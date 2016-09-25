@@ -17,4 +17,13 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
+    <style name="LabelStyle" parent="TextAppearance.AppCompat.Body1">
+        <item name="android:padding">@dimen/cell_padding</item>
+    </style>
+
+    <style name="DataStyle" parent="TextAppearance.AppCompat.Body2">
+        <item name="android:padding">@dimen/cell_padding</item>
+        <item name="android:layout_marginLeft">@dimen/cell_margin</item>
+    </style>
+
 </resources>

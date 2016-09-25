@@ -6,4 +6,22 @@
     <string name="or">OR</string>
     <string name="error_invalid_search">Please enter a valid search query</string>
     <string name="error_no_weather_data">No weather data available</string>
+
+    <string name="weather_temp">%1$S\u00B0C %2$S</string>
+    <string name="weather_wind">%1$s m/s %2$s</string>
+    <string name="weather_pressure">%1$s hPa</string>
+    <string name="weather_humidity">%1$s%%</string>
+    <string name="weather_rain">%1$s mm</string>
+
+    <string name="label_location">Weather in %1$s, %2$s</string>
+    <string name="label_wind">Wind</string>
+    <string name="label_cloudiness">Cloudiness</string>
+    <string name="label_pressure">Pressure</string>
+    <string name="label_humidity">Humidity</string>
+    <string name="label_rain">Rain (last 3hr)</string>
+    <string name="label_sunrise">Sunrise</string>
+    <string name="label_sunset">Sunset</string>
+    <string name="blank">-</string>
+    <string name="weather">Weather</string>
+
 </resources>
