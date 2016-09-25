@@ -1,16 +1,19 @@
 package com.neaniesoft.myweather.weather;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.neaniesoft.myweather.R;
 import com.neaniesoft.myweather.search.SearchActivity;
+
+import butterknife.BindView;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -18,6 +21,33 @@ import com.neaniesoft.myweather.search.SearchActivity;
 public class WeatherFragment extends Fragment implements WeatherView {
 
     private WeatherPresenter mPresenter;
+
+    @BindView(R.id.text_label_location)
+    TextView textLocation;
+
+    @BindView(R.id.text_wind)
+    TextView textWind;
+
+    @BindView(R.id.text_cloudiness)
+    TextView textCloudiness;
+
+    @BindView(R.id.text_pressure)
+    TextView textPressure;
+
+    @BindView(R.id.text_humidity)
+    TextView textHumidity;
+
+    @BindView(R.id.text_rain)
+    TextView textRain;
+
+    @BindView(R.id.text_sunrise)
+    TextView textSunrise;
+
+    @BindView(R.id.text_sunset)
+    TextView textSunset;
+
+    @BindView(R.id.text_temp_and_conditions)
+    TextView textTempAndConditions;
 
     public WeatherFragment() {
     }
@@ -47,6 +77,89 @@ public class WeatherFragment extends Fragment implements WeatherView {
     public void showErrorNoWeatherData() {
         if (getView() != null) {
             Snackbar.make(getView(), R.string.error_no_weather_data, Snackbar.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
+    public void setLocation(String name, String countryCode) {
+        if (name != null) {
+            textLocation.setText(getString(R.string.label_location, name, countryCode != null ? countryCode : "-"));
+        } else {
+            textLocation.setText(R.string.weather);
+        }
+    }
+
+    @Override
+    public void setTempAndConditions(String temp, String conditions) {
+        if (temp != null) {
+            textTempAndConditions.setText(
+                    getString(R.string.weather_temp_and_conditions, temp, conditions)
+            );
+        } else {
+            textTempAndConditions.setText(R.string.blank);
+        }
+    }
+
+    @Override
+    public void setWind(String speed, String direction) {
+        if (speed != null) {
+            textWind.setText(getString(R.string.weather_wind, speed, direction));
+        } else {
+            textWind.setText(R.string.blank);
+        }
+    }
+
+    @Override
+    public void setCloudiness(String cloudiness) {
+        if (cloudiness != null) {
+            textCloudiness.setText(cloudiness);
+        } else {
+            textCloudiness.setText(R.string.blank);
+        }
+    }
+
+    @Override
+    public void setPressure(String pressure) {
+        if (pressure != null) {
+            textPressure.setText(getString(R.string.weather_pressure, pressure));
+        } else {
+            textPressure.setText(R.string.blank);
+        }
+    }
+
+    @Override
+    public void setHumidity(String humidity) {
+        if (humidity != null) {
+            textHumidity.setText(getString(R.string.weather_humidity, humidity));
+        } else {
+            textHumidity.setText(R.string.blank);
+        }
+    }
+
+    @Override
+    public void setRain(String rain) {
+        if (rain != null) {
+            textRain.setText(getString(R.string.weather_rain, rain));
+        } else {
+            textRain.setText(R.string.blank);
+        }
+    }
+
+    @Override
+    public void setSunrise(String sunrise) {
+        if (sunrise != null) {
+            textSunrise.setText(sunrise);
+        } else {
+            textSunrise.setText(R.string.blank);
+        }
+    }
+
+    @Override
+    public void setSunset(String sunset) {
+        if (sunset != null) {
+            textSunset.setText(sunset);
+        } else {
+            textSunset.setText(R.string.blank);
         }
     }
 

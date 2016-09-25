@@ -62,8 +62,8 @@ public class WeatherPresenterImpl implements WeatherPresenter {
         });
     }
 
-    private void setWeatherData(CurrentWeather currentWeather) {
-
+    private void setWeatherData(@NonNull CurrentWeather currentWeather) {
+        
     }
 
     @Override

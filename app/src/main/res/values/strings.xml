@@ -7,7 +7,7 @@
     <string name="error_invalid_search">Please enter a valid search query</string>
     <string name="error_no_weather_data">No weather data available</string>
 
-    <string name="weather_temp">%1$S\u00B0C %2$S</string>
+    <string name="weather_temp_and_conditions">%1$S\u00B0C %2$S</string>
     <string name="weather_wind">%1$s m/s %2$s</string>
     <string name="weather_pressure">%1$s hPa</string>
     <string name="weather_humidity">%1$s%%</string>
