@@ -1,5 +1,6 @@
 package com.neaniesoft.myweather.data.repository.remote;
 
+import com.neaniesoft.myweather.BuildConfig;
 import com.neaniesoft.myweather.data.model.CurrentWeather;
 import com.neaniesoft.myweather.data.repository.WeatherProvider;
 
@@ -47,21 +48,21 @@ public class OpenWeatherMapProviderTest {
     @Test
     public void OpenWeatherMapProvider_HitsServiceForCity() {
         openWeatherMapProvider.searchForCurrentWeather("Sydney", currentWeatherCallback);
-        verify(openWeatherMapService).searchForCurrentWeatherByCity("Sydney", null);
+        verify(openWeatherMapService).searchForCurrentWeatherByCity("Sydney", BuildConfig.OPENWEATHERMAP_API_KEY);
         verify(call).enqueue(ArgumentCaptor.forClass(Callback.class).capture());
     }
 
     @Test
     public void OpenWeatherMapProvider_HitsServiceForLatLon() {
         openWeatherMapProvider.searchForCurrentWeather(0d, 0d, currentWeatherCallback);
-        verify(openWeatherMapService).searchForCurrentWeatherByLatLon("0.0", "0.0", null);
+        verify(openWeatherMapService).searchForCurrentWeatherByLatLon("0.0", "0.0", BuildConfig.OPENWEATHERMAP_API_KEY);
         verify(call).enqueue(ArgumentCaptor.forClass(Callback.class).capture());
     }
 
     @Test
     public void OpenWeatherMapProvider_HitsServiceForZip() {
         openWeatherMapProvider.searchForCurrentWeather("90210", currentWeatherCallback);
-        verify(openWeatherMapService).searchForCurrentWeatherByZip("90210", null);
+        verify(openWeatherMapService).searchForCurrentWeatherByZip("90210", BuildConfig.OPENWEATHERMAP_API_KEY);
         verify(call).enqueue(ArgumentCaptor.forClass(Callback.class).capture());
     }
 

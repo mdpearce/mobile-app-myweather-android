@@ -14,6 +14,7 @@ public class SearchActivity extends AppCompatActivity implements SearchFragment.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setResult(RESULT_CANCELED);
         setContentView(R.layout.activity_search);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -34,6 +35,7 @@ public class SearchActivity extends AppCompatActivity implements SearchFragment.
 
     @Override
     public void finishRequested() {
+        setResult(RESULT_OK);
         finish();
     }
 }
