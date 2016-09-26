@@ -1,6 +1,16 @@
 # mobile-app-myweather-android
 My Weather (Gumtree)
 
+Instructions
+------------
+
+Please create a file 'keys.gradle' in the 'app' directory and add the following line:
+
+`project.ext.openweathermapApiKey = "YOUR_KEY"`
+
+where YOUR_KEY is the API key to use on openweathermap.org calls
+
+
 Notes
 -----
 
