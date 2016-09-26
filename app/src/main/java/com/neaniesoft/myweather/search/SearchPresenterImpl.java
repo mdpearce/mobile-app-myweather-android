@@ -1,5 +1,6 @@
 package com.neaniesoft.myweather.search;
 
+import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 
 import com.neaniesoft.myweather.prefs.LocationPrefs;
@@ -26,6 +27,11 @@ public class SearchPresenterImpl implements SearchPresenter {
 
     @Override
     public void myLocationRequested() {
+        if (mSearchView.checkLocationPermission() != PackageManager.PERMISSION_GRANTED) {
+            mSearchView.requestLocationPermission();
+        } else {
+            myLocationPermissionGranted();
+        }
     }
 
     @Override
@@ -37,5 +43,19 @@ public class SearchPresenterImpl implements SearchPresenter {
             mLocationPrefs.setLatestSearch(searchQuery.trim());
             mSearchView.finish();
         }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == SearchView.PERMISSIONS_REQUEST_LOCATION) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                myLocationPermissionGranted();
+            }
+        }
+    }
+
+    private void myLocationPermissionGranted() {
+        mLocationPrefs.setUseMyLocation(true);
+        mSearchView.finish();
     }
 }

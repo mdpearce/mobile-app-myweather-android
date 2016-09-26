@@ -1,11 +1,13 @@
 package com.neaniesoft.myweather.search;
 
+import android.Manifest;
 import android.content.Context;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -107,6 +109,16 @@ public class SearchFragment extends Fragment implements SearchView {
         }
     }
 
+    @Override
+    public int checkLocationPermission() {
+        return ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION);
+    }
+
+    @Override
+    public void requestLocationPermission() {
+        requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSIONS_REQUEST_LOCATION);
+    }
+
     @OnClick(R.id.button_my_location)
     void onMyLocationButtonClicked() {
         mSearchPresenter.myLocationRequested();
@@ -114,5 +126,10 @@ public class SearchFragment extends Fragment implements SearchView {
 
     interface SearchFragmentListener {
         void finishRequested();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        mSearchPresenter.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 }

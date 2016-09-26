@@ -7,8 +7,14 @@ import com.neaniesoft.myweather.BaseView;
  */
 
 public interface SearchView extends BaseView<SearchPresenter> {
+    int PERMISSIONS_REQUEST_LOCATION = 0;
+
     String getSearchQuery();
     void finish();
 
     void showErrorInvalidSearch();
+
+    int checkLocationPermission();
+
+    void requestLocationPermission();
 }
