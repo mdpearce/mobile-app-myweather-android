@@ -10,7 +10,7 @@ import java.util.Locale;
 
 public class TextUtils {
     /**
-     * Taken from Apache TextUtils
+     * Taken from Android source - saves having to include Android dependencies in unit tests
      * Returns whether the given CharSequence contains only digits.
      */
     public static boolean isDigitsOnly(CharSequence str) {
@@ -38,7 +38,7 @@ public class TextUtils {
         return null;
     }
 
-    // Basic direction -> cardinal conversion from http://stackoverflow.com/a/25349774/765286
+    // Basic degrees -> cardinal conversion from http://stackoverflow.com/a/25349774/765286
     public static String formatDirection(Double directionDegrees) {
         if (directionDegrees == null) {
             return null;

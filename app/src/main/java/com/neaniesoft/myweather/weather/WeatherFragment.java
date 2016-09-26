@@ -2,24 +2,24 @@ package com.neaniesoft.myweather.weather;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.Scope;
 import com.google.android.gms.location.LocationServices;
 import com.neaniesoft.myweather.R;
 import com.neaniesoft.myweather.search.SearchActivity;
@@ -61,6 +61,9 @@ public class WeatherFragment extends Fragment implements WeatherView, GoogleApiC
 
     @BindView(R.id.text_temp_and_conditions)
     TextView textTempAndConditions;
+
+    @BindView(R.id.progress_bar)
+    ProgressBar progressBar;
 
     private Unbinder mUnbinder;
 
@@ -167,7 +170,7 @@ public class WeatherFragment extends Fragment implements WeatherView, GoogleApiC
     @Override
     public void setCloudiness(String cloudiness) {
         if (cloudiness != null) {
-            textCloudiness.setText(cloudiness);
+            textCloudiness.setText(getString(R.string.weather_cloudiness, cloudiness));
         } else {
             textCloudiness.setText(R.string.blank);
         }
@@ -220,12 +223,12 @@ public class WeatherFragment extends Fragment implements WeatherView, GoogleApiC
 
     @Override
     public void showProgressIndicator() {
-
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideProgressIndicator() {
-
+        progressBar.setVisibility(View.GONE);
     }
 
     @Override
@@ -289,7 +292,11 @@ public class WeatherFragment extends Fragment implements WeatherView, GoogleApiC
     }
 
     private void sendMyLocationToPresenter() {
-        mPresenter.setMyLocation(LocationServices.FusedLocationApi.getLastLocation(getGoogleApiClient()));
+        // Double check permission on the off chance that this is called when permission is denied
+        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            mPresenter.setMyLocation(LocationServices.FusedLocationApi.getLastLocation(getGoogleApiClient()));
+        }
+
     }
 
     @Override

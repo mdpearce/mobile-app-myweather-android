@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:orientation="vertical"
-    android:id="@+id/content_weather"
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -13,122 +12,138 @@
     tools:context="com.neaniesoft.myweather.weather.WeatherFragment"
     tools:showIn="@layout/activity_weather">
 
-    <TextView
-        android:text="@string/weather"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/text_label_location"
-        android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/text_temp_and_conditions"
-        android:text="@string/blank"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
-
-    <GridLayout
+    <LinearLayout
+        android:id="@+id/content_weather"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:columnCount="2">
+        android:orientation="vertical"
+        >
 
         <TextView
-            android:id="@+id/text_label_wind"
-            android:layout_width="wrap_content"
+            android:id="@+id/text_label_location"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/label_wind"
-            style="@style/LabelStyle"/>
+            android:text="@string/weather"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
 
         <TextView
-            android:id="@+id/text_wind"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/blank"
-            style="@style/DataStyle"/>
-
-        <TextView
-            android:id="@+id/text_label_cloudiness"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/label_cloudiness"
-            style="@style/LabelStyle"/>
-
-        <TextView
-            android:id="@+id/text_cloudiness"
+            android:id="@+id/text_temp_and_conditions"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/blank"
-            style="@style/DataStyle"/>
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
 
-        <TextView
-            android:id="@+id/text_label_pressure"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/label_pressure"
-            style="@style/LabelStyle"/>
+        <GridLayout
+            android:layout_marginTop="@dimen/cell_margin"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:columnCount="2">
 
-        <TextView
-            android:id="@+id/text_pressure"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/blank"
-            style="@style/DataStyle"/>
+            <TextView
+                android:id="@+id/text_label_wind"
+                style="@style/LabelStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_wind"/>
 
-        <TextView
-            android:id="@+id/text_label_humidity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/label_humidity"
-            style="@style/LabelStyle"/>
+            <TextView
+                android:id="@+id/text_wind"
+                style="@style/DataStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/blank"/>
 
-        <TextView
-            android:id="@+id/text_humidity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/blank"
-            style="@style/DataStyle"/>
+            <TextView
+                android:id="@+id/text_label_cloudiness"
+                style="@style/LabelStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_cloudiness"/>
 
-        <TextView
-            android:id="@+id/text_label_rain"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/label_rain"
-            style="@style/LabelStyle"/>
+            <TextView
+                android:id="@+id/text_cloudiness"
+                style="@style/DataStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/blank"/>
 
-        <TextView
-            android:id="@+id/text_rain"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/blank"
-            style="@style/DataStyle"/>
+            <TextView
+                android:id="@+id/text_label_pressure"
+                style="@style/LabelStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_pressure"/>
 
-        <TextView
-            android:id="@+id/text_label_sunrise"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/label_sunrise"
-            style="@style/LabelStyle"/>
+            <TextView
+                android:id="@+id/text_pressure"
+                style="@style/DataStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/blank"/>
 
-        <TextView
-            android:id="@+id/text_sunrise"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/blank"
-            style="@style/DataStyle"/>
+            <TextView
+                android:id="@+id/text_label_humidity"
+                style="@style/LabelStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_humidity"/>
 
-        <TextView
-            android:id="@+id/text_label_sunset"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/label_sunset"
-            style="@style/LabelStyle"/>
+            <TextView
+                android:id="@+id/text_humidity"
+                style="@style/DataStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/blank"/>
 
-        <TextView
-            android:id="@+id/text_sunset"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/blank"
-            style="@style/DataStyle"/>
-    </GridLayout>
+            <TextView
+                android:id="@+id/text_label_rain"
+                style="@style/LabelStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_rain"/>
 
-</LinearLayout>
+            <TextView
+                android:id="@+id/text_rain"
+                style="@style/DataStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/blank"/>
+
+            <TextView
+                android:id="@+id/text_label_sunrise"
+                style="@style/LabelStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_sunrise"/>
+
+            <TextView
+                android:id="@+id/text_sunrise"
+                style="@style/DataStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/blank"/>
+
+            <TextView
+                android:id="@+id/text_label_sunset"
+                style="@style/LabelStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_sunset"/>
+
+            <TextView
+                android:id="@+id/text_sunset"
+                style="@style/DataStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/blank"/>
+        </GridLayout>
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminate="true"
+        android:visibility="gone"/>
+</FrameLayout>

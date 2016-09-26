@@ -70,14 +70,17 @@ public class WeatherPresenterImpl implements WeatherPresenter {
 
     @Override
     public void searchForWeather(String query) {
+        mWeatherView.showProgressIndicator();
         mWeatherRepository.searchForCurrentWeather(query, new WeatherProvider.CurrentWeatherCallback() {
             @Override
             public void onCurrentWeatherReceived(@NonNull CurrentWeather currentWeather) {
+                mWeatherView.hideProgressIndicator();
                 setWeatherData(currentWeather);
             }
 
             @Override
             public void onNoCurrentWeatherAvailable(@Nullable String error) {
+                mWeatherView.hideProgressIndicator();
                 mWeatherView.showErrorNoWeatherData();
             }
         });
@@ -171,14 +174,17 @@ public class WeatherPresenterImpl implements WeatherPresenter {
         if (location == null) {
             mWeatherView.showErrorNoLocation();
         } else {
+            mWeatherView.showProgressIndicator();
             mWeatherRepository.searchForCurrentWeather(location.getLatitude(), location.getLongitude(), new WeatherProvider.CurrentWeatherCallback() {
                 @Override
                 public void onCurrentWeatherReceived(@NonNull CurrentWeather currentWeather) {
+                    mWeatherView.hideProgressIndicator();
                     setWeatherData(currentWeather);
                 }
 
                 @Override
                 public void onNoCurrentWeatherAvailable(@Nullable String error) {
+                    mWeatherView.hideProgressIndicator();
                     mWeatherView.showErrorNoWeatherData();
                 }
             });

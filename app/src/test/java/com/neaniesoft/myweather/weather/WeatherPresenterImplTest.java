@@ -3,6 +3,7 @@ package com.neaniesoft.myweather.weather;
 import android.Manifest;
 import android.app.Activity;
 import android.content.pm.PackageManager;
+import android.location.Location;
 
 import com.neaniesoft.myweather.data.model.CurrentWeather;
 import com.neaniesoft.myweather.data.model.entities.Clouds;
@@ -41,6 +42,9 @@ public class WeatherPresenterImplTest {
     @Mock
     WeatherRepository mRepository;
 
+    @Mock
+    Location mMockLocation;
+
     @Captor
     private ArgumentCaptor<WeatherProvider.CurrentWeatherCallback> mCurrentWeatherCallbackCaptor;
 
@@ -49,6 +53,9 @@ public class WeatherPresenterImplTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
+
+        when(mMockLocation.getLatitude()).thenReturn(0.0);
+        when(mMockLocation.getLongitude()).thenReturn(0.0);
 
         mWeatherPresenter = new WeatherPresenterImpl(mWeatherView, mLocationPrefs, mRepository);
     }
@@ -114,6 +121,34 @@ public class WeatherPresenterImplTest {
     public void WeatherPresenter_doNotPerformNewSearchWhenSearchActivityCancelled() {
         mWeatherPresenter.activityResult(WeatherView.REQUEST_SEARCH, Activity.RESULT_CANCELED, null);
         verifyZeroInteractions(mRepository);
+    }
+
+    @Test
+    public void WeatherPresenter_showProgressIndicatorWhenSearching() {
+        mWeatherPresenter.searchForWeather("Sydney");
+        verify(mWeatherView).showProgressIndicator();
+    }
+
+    @Test
+    public void WeatherPresenter_hideProgressIndicatorWhenSearchFinished() {
+        mWeatherPresenter.searchForWeather("Sydney");
+        verify(mRepository).searchForCurrentWeather(eq("Sydney"), mCurrentWeatherCallbackCaptor.capture());
+        mCurrentWeatherCallbackCaptor.getValue().onCurrentWeatherReceived(TEST_CURRENT_WEATHER());
+        verify(mWeatherView).hideProgressIndicator();
+    }
+
+    @Test
+    public void WeatherPresenter_showProgressIndicatorWhenSearchingLatLon() {
+        mWeatherPresenter.setMyLocation(mMockLocation);
+        verify(mWeatherView).showProgressIndicator();
+    }
+
+    @Test
+    public void WeatherPresenter_hideProgressIndicatorWhenLatLonSearchFinished() {
+        mWeatherPresenter.setMyLocation(mMockLocation);
+        verify(mRepository).searchForCurrentWeather(eq(0.0), eq(0.0), mCurrentWeatherCallbackCaptor.capture());
+        mCurrentWeatherCallbackCaptor.getValue().onCurrentWeatherReceived(TEST_CURRENT_WEATHER());
+        verify(mWeatherView).hideProgressIndicator();
     }
 
     private static CurrentWeather TEST_CURRENT_WEATHER() {
