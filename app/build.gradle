@@ -21,6 +21,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    productFlavors {
+        australia {
+            applicationId "com.neaniesoft.myweather.aus"
+        }
+        canada {
+            applicationId "com.neaniesoft.myweather.ca"
+        }
+    }
 }
 
 
