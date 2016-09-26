@@ -8,6 +8,7 @@ import com.neaniesoft.myweather.BaseView;
 
 public interface WeatherView extends BaseView<WeatherPresenter> {
     int REQUEST_SEARCH = 0;
+    int PERMISSION_REQUEST_LOCATION = 10;
 
     void launchSearchPage();
 
@@ -34,4 +35,14 @@ public interface WeatherView extends BaseView<WeatherPresenter> {
     void showProgressIndicator();
 
     void hideProgressIndicator();
+
+    int checkLocationPermission();
+
+    void requestLocationPermission();
+
+    void requestMyLocation();
+
+    void showErrorNoLocation();
+
+    void showErrorNoPermission();
 }

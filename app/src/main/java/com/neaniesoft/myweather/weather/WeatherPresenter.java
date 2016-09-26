@@ -1,6 +1,8 @@
 package com.neaniesoft.myweather.weather;
 
 import android.content.Intent;
+import android.location.Location;
+import android.support.annotation.NonNull;
 
 import com.neaniesoft.myweather.BasePresenter;
 
@@ -16,4 +18,8 @@ public interface WeatherPresenter extends BasePresenter {
     void activityResult(int requestCode, int resultCode, Intent data);
 
     void searchPageRequested();
+
+    void setMyLocation(Location location);
+
+    void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults);
 }

@@ -2,6 +2,8 @@ package com.neaniesoft.myweather.weather;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
@@ -59,6 +61,11 @@ public class WeatherPresenterImpl implements WeatherPresenter {
 
     @Override
     public void loadMyLocation() {
+        if (mWeatherView.checkLocationPermission() != PackageManager.PERMISSION_GRANTED) {
+            mWeatherView.requestLocationPermission();
+        } else {
+            mWeatherView.requestMyLocation();
+        }
     }
 
     @Override
@@ -157,5 +164,35 @@ public class WeatherPresenterImpl implements WeatherPresenter {
     @Override
     public void searchPageRequested() {
         mWeatherView.launchSearchPage();
+    }
+
+    @Override
+    public void setMyLocation(Location location) {
+        if (location == null) {
+            mWeatherView.showErrorNoLocation();
+        } else {
+            mWeatherRepository.searchForCurrentWeather(location.getLatitude(), location.getLongitude(), new WeatherProvider.CurrentWeatherCallback() {
+                @Override
+                public void onCurrentWeatherReceived(@NonNull CurrentWeather currentWeather) {
+                    setWeatherData(currentWeather);
+                }
+
+                @Override
+                public void onNoCurrentWeatherAvailable(@Nullable String error) {
+                    mWeatherView.showErrorNoWeatherData();
+                }
+            });
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == WeatherView.PERMISSION_REQUEST_LOCATION) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                mWeatherView.requestMyLocation();
+            } else {
+                mWeatherView.showErrorNoPermission();
+            }
+        }
     }
 }

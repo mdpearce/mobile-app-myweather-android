@@ -24,5 +24,7 @@
     <string name="blank">-</string>
     <string name="weather">Weather</string>
     <string name="action_search">Search</string>
+    <string name="error_no_location">Error getting current location</string>
+    <string name="error_no_permission">Please enable location permission</string>
 
 </resources>

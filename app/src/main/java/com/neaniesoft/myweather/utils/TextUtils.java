@@ -26,7 +26,7 @@ public class TextUtils {
 
     public static @Nullable String formatDoubleValue(Double value) {
         if (value != null) {
-            return String.format(Locale.getDefault(), "%.2f", value);
+            return String.format(Locale.getDefault(), "%.1f", value);
         }
         return null;
     }

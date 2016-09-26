@@ -1,10 +1,14 @@
 package com.neaniesoft.myweather.weather;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -13,6 +17,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.Scope;
+import com.google.android.gms.location.LocationServices;
 import com.neaniesoft.myweather.R;
 import com.neaniesoft.myweather.search.SearchActivity;
 
@@ -23,7 +31,7 @@ import butterknife.Unbinder;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class WeatherFragment extends Fragment implements WeatherView {
+public class WeatherFragment extends Fragment implements WeatherView, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     private WeatherPresenter mPresenter;
 
@@ -55,6 +63,10 @@ public class WeatherFragment extends Fragment implements WeatherView {
     TextView textTempAndConditions;
 
     private Unbinder mUnbinder;
+
+    private GoogleApiClient mGoogleApiClient;
+
+    private boolean waitingForLocation;
 
     public WeatherFragment() {
     }
@@ -95,7 +107,14 @@ public class WeatherFragment extends Fragment implements WeatherView {
     @Override
     public void onStart() {
         super.onStart();
+        getGoogleApiClient().connect();
         mPresenter.start();
+    }
+
+    @Override
+    public void onStop() {
+        getGoogleApiClient().disconnect();
+        super.onStop();
     }
 
     @Override
@@ -210,7 +229,81 @@ public class WeatherFragment extends Fragment implements WeatherView {
     }
 
     @Override
+    public int checkLocationPermission() {
+        return ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION);
+    }
+
+    @Override
+    public void requestLocationPermission() {
+        requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_REQUEST_LOCATION);
+    }
+
+    @Override
+    public void requestMyLocation() {
+        if (getGoogleApiClient().isConnected()) {
+            sendMyLocationToPresenter();
+        } else {
+            waitingForLocation = true;
+            if (!getGoogleApiClient().isConnecting()) {
+                getGoogleApiClient().connect();
+            }
+        }
+    }
+
+    @Override
+    public void showErrorNoLocation() {
+        if (getView() != null) {
+            Snackbar.make(getView(), R.string.error_no_location, Snackbar.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
+    public void showErrorNoPermission() {
+        if (getView() != null) {
+            Snackbar.make(getView(), R.string.error_no_permission, Snackbar.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         mPresenter.activityResult(requestCode, resultCode, data);
+    }
+
+    private GoogleApiClient getGoogleApiClient() {
+        if (mGoogleApiClient == null) {
+            mGoogleApiClient = new GoogleApiClient.Builder(getContext())
+                    .addConnectionCallbacks(this)
+                    .addOnConnectionFailedListener(this)
+                    .addApi(LocationServices.API)
+                    .build();
+        }
+        return mGoogleApiClient;
+    }
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+        if (waitingForLocation) {
+            waitingForLocation = false;
+            sendMyLocationToPresenter();
+        }
+    }
+
+    private void sendMyLocationToPresenter() {
+        mPresenter.setMyLocation(LocationServices.FusedLocationApi.getLastLocation(getGoogleApiClient()));
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        mPresenter.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 }
