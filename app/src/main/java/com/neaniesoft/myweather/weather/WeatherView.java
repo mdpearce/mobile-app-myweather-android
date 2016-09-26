@@ -30,4 +30,8 @@ public interface WeatherView extends BaseView<WeatherPresenter> {
     void setSunrise(String sunrise);
 
     void setSunset(String sunset);
+
+    void showProgressIndicator();
+
+    void hideProgressIndicator();
 }

@@ -153,4 +153,9 @@ public class WeatherPresenterImpl implements WeatherPresenter {
             checkForLocation();
         }
     }
+
+    @Override
+    public void searchPageRequested() {
+        mWeatherView.launchSearchPage();
+    }
 }

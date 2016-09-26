@@ -14,4 +14,6 @@ public interface WeatherPresenter extends BasePresenter {
     void searchForWeather(String query);
 
     void activityResult(int requestCode, int resultCode, Intent data);
+
+    void searchPageRequested();
 }

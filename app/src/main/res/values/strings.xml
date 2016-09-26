@@ -23,5 +23,6 @@
     <string name="label_sunset">Sunset</string>
     <string name="blank">-</string>
     <string name="weather">Weather</string>
+    <string name="action_search">Search</string>
 
 </resources>

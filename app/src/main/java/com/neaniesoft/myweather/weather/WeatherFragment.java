@@ -6,6 +6,9 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -56,6 +59,20 @@ public class WeatherFragment extends Fragment implements WeatherView {
     public WeatherFragment() {
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_weather, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (R.id.action_search == item.getItemId()) {
+            mPresenter.searchPageRequested();
+            return true;
+        }
+        return false;
+    }
+
     public static WeatherFragment newInstance() {
         return new WeatherFragment();
     }
@@ -63,6 +80,7 @@ public class WeatherFragment extends Fragment implements WeatherView {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
         View v = inflater.inflate(R.layout.fragment_weather, container, false);
         mUnbinder = ButterKnife.bind(this, v);
         return v;
@@ -179,6 +197,16 @@ public class WeatherFragment extends Fragment implements WeatherView {
         } else {
             textSunset.setText(R.string.blank);
         }
+    }
+
+    @Override
+    public void showProgressIndicator() {
+
+    }
+
+    @Override
+    public void hideProgressIndicator() {
+
     }
 
     @Override
